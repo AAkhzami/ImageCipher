@@ -65,5 +65,19 @@ namespace ImageCipher
             }
 
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            if(txbPassword.PasswordChar == '*')
+            {
+                txbPassword.PasswordChar = '\0';
+                pbVisible.Image = Properties.Resources.invisible;
+            }
+            else
+            {
+                txbPassword.PasswordChar = '*';
+                pbVisible.Image = Properties.Resources.visible;
+            }
+        }
     }
 }

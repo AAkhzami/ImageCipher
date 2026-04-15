@@ -40,9 +40,9 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pbVisible = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txbPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.ofdChooseImage = new System.Windows.Forms.OpenFileDialog();
             this.label6 = new System.Windows.Forms.Label();
@@ -53,7 +53,7 @@
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVisible)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -128,9 +128,9 @@
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(67)))), ((int)(((byte)(86)))));
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.pictureBox2);
+            this.panel2.Controls.Add(this.pbVisible);
             this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.txbPassword);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Location = new System.Drawing.Point(475, 138);
             this.panel2.Margin = new System.Windows.Forms.Padding(25);
@@ -210,15 +210,16 @@
             this.label4.TabIndex = 11;
             this.label4.Text = "Dont lose this password ";
             // 
-            // pictureBox2
+            // pbVisible
             // 
-            this.pictureBox2.Image = global::ImageCipher.Properties.Resources.visible;
-            this.pictureBox2.Location = new System.Drawing.Point(518, 136);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(36, 36);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 8;
-            this.pictureBox2.TabStop = false;
+            this.pbVisible.Image = global::ImageCipher.Properties.Resources.visible;
+            this.pbVisible.Location = new System.Drawing.Point(518, 136);
+            this.pbVisible.Name = "pbVisible";
+            this.pbVisible.Size = new System.Drawing.Size(36, 36);
+            this.pbVisible.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbVisible.TabIndex = 8;
+            this.pbVisible.TabStop = false;
+            this.pbVisible.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // label5
             // 
@@ -231,15 +232,15 @@
             this.label5.TabIndex = 7;
             this.label5.Text = "Password";
             // 
-            // textBox1
+            // txbPassword
             // 
-            this.textBox1.BackColor = System.Drawing.Color.LavenderBlush;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Tai Le", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(44, 136);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PasswordChar = '*';
-            this.textBox1.Size = new System.Drawing.Size(468, 37);
-            this.textBox1.TabIndex = 6;
+            this.txbPassword.BackColor = System.Drawing.Color.LavenderBlush;
+            this.txbPassword.Font = new System.Drawing.Font("Microsoft Tai Le", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbPassword.Location = new System.Drawing.Point(44, 136);
+            this.txbPassword.Name = "txbPassword";
+            this.txbPassword.PasswordChar = '*';
+            this.txbPassword.Size = new System.Drawing.Size(468, 37);
+            this.txbPassword.TabIndex = 6;
             // 
             // label3
             // 
@@ -304,7 +305,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVisible)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -319,9 +320,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnChooseImage;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txbPassword;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pbVisible;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label4;
