@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -78,6 +80,45 @@ namespace ImageCipher
                 txbPassword.PasswordChar = '*';
                 pbVisible.Image = Properties.Resources.visible;
             }
+        }
+
+        private void EncryptFile(string inputFile, string outputFile, string key, byte[] iv)
+        {
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = System.Text.Encoding.UTF8.GetBytes(key);
+                aesAlg.IV = iv;
+
+                using (FileStream fsInput = new FileStream(inputFile, FileMode.Open))
+                using (FileStream fsOutput = new FileStream(outputFile, FileMode.Create))
+                using (ICryptoTransform encryptor = aesAlg.CreateEncryptor())
+                using (CryptoStream cryptoStream = new CryptoStream(fsOutput, encryptor, CryptoStreamMode.Write))
+                {
+                    // Write the IV to the beginning of the file
+                    fsOutput.Write(iv, 0, iv.Length);
+                    fsInput.CopyTo(cryptoStream);
+                }
+            }
+        }
+        private void btnEncrypt_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(_FilePath) && string.IsNullOrEmpty(_FilePath))
+            {
+                MessageBox.Show("Please select a file to encrypt.");
+                return;
+            }
+        }
+
+        private void txbPassword_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txbPassword.Text))
+                errorProvider1.SetError(txbPassword, "This field must not be empty!");
+            else
+                errorProvider1.SetError(txbPassword, "");
+            if(txbPassword.Text.Length < 16)
+                errorProvider1.SetError(txbPassword, "The key must be exactly 16 characters long!");
+            else
+                errorProvider1.SetError(txbPassword, "");
         }
     }
 }

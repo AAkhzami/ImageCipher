@@ -28,15 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblFilePath = new System.Windows.Forms.Label();
             this.btnChooseImage = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnDecrypt = new System.Windows.Forms.Button();
+            this.btnEncrypt = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -46,7 +48,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.ofdChooseImage = new System.Windows.Forms.OpenFileDialog();
             this.label6 = new System.Windows.Forms.Label();
-            this.lblFilePath = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -54,6 +56,7 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVisible)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -72,6 +75,17 @@
             this.panel1.TabIndex = 0;
             this.panel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.panel1_DragDrop);
             this.panel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.panel1_DragEnter);
+            // 
+            // lblFilePath
+            // 
+            this.lblFilePath.Font = new System.Drawing.Font("Microsoft Tai Le", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFilePath.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.lblFilePath.Location = new System.Drawing.Point(20, 318);
+            this.lblFilePath.Name = "lblFilePath";
+            this.lblFilePath.Size = new System.Drawing.Size(378, 23);
+            this.lblFilePath.TabIndex = 8;
+            this.lblFilePath.Text = "...Path...";
+            this.lblFilePath.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnChooseImage
             // 
@@ -140,42 +154,43 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.button3);
-            this.panel4.Controls.Add(this.button2);
+            this.panel4.Controls.Add(this.btnDecrypt);
+            this.panel4.Controls.Add(this.btnEncrypt);
             this.panel4.Location = new System.Drawing.Point(50, 291);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(504, 100);
             this.panel4.TabIndex = 11;
             // 
-            // button3
+            // btnDecrypt
             // 
-            this.button3.BackColor = System.Drawing.Color.RoyalBlue;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Microsoft Tai Le", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(261, 26);
-            this.button3.Margin = new System.Windows.Forms.Padding(35);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(208, 48);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "Decrypt";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnDecrypt.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnDecrypt.FlatAppearance.BorderSize = 0;
+            this.btnDecrypt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDecrypt.Font = new System.Drawing.Font("Microsoft Tai Le", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDecrypt.ForeColor = System.Drawing.Color.White;
+            this.btnDecrypt.Location = new System.Drawing.Point(261, 26);
+            this.btnDecrypt.Margin = new System.Windows.Forms.Padding(35);
+            this.btnDecrypt.Name = "btnDecrypt";
+            this.btnDecrypt.Size = new System.Drawing.Size(208, 48);
+            this.btnDecrypt.TabIndex = 10;
+            this.btnDecrypt.Text = "Decrypt";
+            this.btnDecrypt.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // btnEncrypt
             // 
-            this.button2.BackColor = System.Drawing.Color.Crimson;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Tai Le", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(35, 26);
-            this.button2.Margin = new System.Windows.Forms.Padding(35);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(208, 48);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Encrypt";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnEncrypt.BackColor = System.Drawing.Color.Crimson;
+            this.btnEncrypt.FlatAppearance.BorderSize = 0;
+            this.btnEncrypt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEncrypt.Font = new System.Drawing.Font("Microsoft Tai Le", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEncrypt.ForeColor = System.Drawing.Color.White;
+            this.btnEncrypt.Location = new System.Drawing.Point(35, 26);
+            this.btnEncrypt.Margin = new System.Windows.Forms.Padding(35);
+            this.btnEncrypt.Name = "btnEncrypt";
+            this.btnEncrypt.Size = new System.Drawing.Size(208, 48);
+            this.btnEncrypt.TabIndex = 9;
+            this.btnEncrypt.Text = "Encrypt";
+            this.btnEncrypt.UseVisualStyleBackColor = false;
+            this.btnEncrypt.Click += new System.EventHandler(this.btnEncrypt_Click);
             // 
             // panel3
             // 
@@ -237,10 +252,12 @@
             this.txbPassword.BackColor = System.Drawing.Color.LavenderBlush;
             this.txbPassword.Font = new System.Drawing.Font("Microsoft Tai Le", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbPassword.Location = new System.Drawing.Point(44, 136);
+            this.txbPassword.MaxLength = 16;
             this.txbPassword.Name = "txbPassword";
             this.txbPassword.PasswordChar = '*';
             this.txbPassword.Size = new System.Drawing.Size(468, 37);
             this.txbPassword.TabIndex = 6;
+            this.txbPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txbPassword_Validating);
             // 
             // label3
             // 
@@ -270,16 +287,11 @@
             this.label6.TabIndex = 13;
             this.label6.Text = "Image Cipher";
             // 
-            // lblFilePath
+            // errorProvider1
             // 
-            this.lblFilePath.Font = new System.Drawing.Font("Microsoft Tai Le", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFilePath.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.lblFilePath.Location = new System.Drawing.Point(20, 318);
-            this.lblFilePath.Name = "lblFilePath";
-            this.lblFilePath.Size = new System.Drawing.Size(378, 23);
-            this.lblFilePath.TabIndex = 8;
-            this.lblFilePath.Text = "...Path...";
-            this.lblFilePath.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.errorProvider1.BlinkRate = 0;
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.ContainerControl = this;
             // 
             // frmImageCipher
             // 
@@ -306,6 +318,7 @@
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVisible)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -327,11 +340,12 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnEncrypt;
+        private System.Windows.Forms.Button btnDecrypt;
         private System.Windows.Forms.OpenFileDialog ofdChooseImage;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblFilePath;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
 
