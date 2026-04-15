@@ -16,6 +16,7 @@ namespace ImageCipher
     {
 
         string _FilePath = string.Empty;
+        string _FolderPath = string.Empty;
         public frmImageCipher()
         {
             InitializeComponent();
@@ -36,6 +37,8 @@ namespace ImageCipher
                 MessageBox.Show("File path : " + FilePath[0]);
                 _FilePath = FilePath[0];
                 lblFilePath.Text = _FilePath;
+                btnDecrypt.Enabled = true;
+
             }
         }
 
@@ -63,7 +66,7 @@ namespace ImageCipher
                 _FilePath = ofdChooseImage.FileName;
                 MessageBox.Show("File path : " + _FilePath);
                 lblFilePath.Text = _FilePath;
-
+                btnDecrypt.Enabled = true;
             }
 
         }
@@ -119,6 +122,17 @@ namespace ImageCipher
                 errorProvider1.SetError(txbPassword, "The key must be exactly 16 characters long!");
             else
                 errorProvider1.SetError(txbPassword, "");
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            fbdCreateFileLocation.Description = "Please select the folder where you want to save the image.";
+            fbdCreateFileLocation.ShowNewFolderButton = true;
+            if (fbdCreateFileLocation.ShowDialog() == DialogResult.OK)
+            {
+                _FolderPath = fbdCreateFileLocation.SelectedPath;
+                btnEncrypt.Enabled = true;
+            }
         }
     }
 }
