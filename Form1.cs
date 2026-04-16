@@ -98,23 +98,34 @@ namespace ImageCipher
                 return finalArray;
             }
         }
-        private void EncryptFile(string inputFile, string outputFile, string key, byte[] iv)
+        private bool EncryptFile(string inputFile, string outputFile, string key, byte[] iv)
         {
-            using (Aes aesAlg = Aes.Create())
+            try
             {
-
-                aesAlg.Key = _DerivedKey(key);
-                aesAlg.IV = iv;
-
-                using (FileStream fsInput = new FileStream(inputFile, FileMode.Open))
-                using (FileStream fsOutput = new FileStream(outputFile, FileMode.Create))
-                using (ICryptoTransform encryptor = aesAlg.CreateEncryptor())
-                using (CryptoStream cryptoStream = new CryptoStream(fsOutput, encryptor, CryptoStreamMode.Write))
+                using (Aes aesAlg = Aes.Create())
                 {
-                    fsOutput.Write(iv, 0, iv.Length);
-                    fsInput.CopyTo(cryptoStream);
+                    aesAlg.Key = _DerivedKey(key);
+                    aesAlg.IV = iv;
+
+                    using (FileStream fsInput = new FileStream(inputFile, FileMode.Open))
+                    using (FileStream fsOutput = new FileStream(outputFile, FileMode.Create))
+                    using (ICryptoTransform encryptor = aesAlg.CreateEncryptor())
+                    using (CryptoStream cryptoStream = new CryptoStream(fsOutput, encryptor, CryptoStreamMode.Write))
+                    {
+                        fsOutput.Write(iv, 0, iv.Length);
+                        fsInput.CopyTo(cryptoStream);
+                        return true;
+                    }
                 }
             }
+            catch (CryptographicException ex)
+            {
+
+            }
+            catch (Exception ex)
+            {
+            }
+            return false;
         }
 
         private void btnEncrypt_Click(object sender, EventArgs e)
@@ -122,7 +133,7 @@ namespace ImageCipher
             if (!this.ValidateChildren())
                 return;
 
-            if(string.IsNullOrEmpty(_FilePath) && string.IsNullOrEmpty(_FilePath))
+            if (string.IsNullOrEmpty(_FilePath) && string.IsNullOrEmpty(_FilePath))
             {
                 MessageBox.Show("Please select a file to encrypt.");
                 return;
@@ -133,10 +144,17 @@ namespace ImageCipher
             {
                 iv = aesAlg.IV;
             }
-            
+
             string fileEncryptedPath = _FolderPath + "\\" + Path.GetFileNameWithoutExtension(_FilePath) + "_encrypted" + Path.GetExtension(_FilePath);
-            
-            EncryptFile(_FilePath, fileEncryptedPath, txbPassword.Text, iv);
+
+            if (EncryptFile(_FilePath, fileEncryptedPath, txbPassword.Text, iv))
+            {
+                MessageBox.Show("File encrypted successfully! Saved at : " + fileEncryptedPath);
+            }
+            else
+            {
+                MessageBox.Show("An error occurred during encryption.");
+            }
         }
 
         private void txbPassword_Validating(object sender, CancelEventArgs e)
