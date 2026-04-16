@@ -52,6 +52,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.fbdCreateFileLocation = new System.Windows.Forms.FolderBrowserDialog();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -67,6 +68,7 @@
             // 
             this.panel1.AllowDrop = true;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(67)))), ((int)(((byte)(86)))));
+            this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.lblFilePath);
             this.panel1.Controls.Add(this.btnChooseImage);
             this.panel1.Controls.Add(this.label2);
@@ -89,7 +91,7 @@
             this.lblFilePath.Name = "lblFilePath";
             this.lblFilePath.Size = new System.Drawing.Size(284, 19);
             this.lblFilePath.TabIndex = 8;
-            this.lblFilePath.Text = "...Path...";
+            this.lblFilePath.Text = "No file selected";
             this.lblFilePath.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnChooseImage
@@ -113,12 +115,12 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Tai Le", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.LightGray;
-            this.label2.Location = new System.Drawing.Point(98, 183);
+            this.label2.Location = new System.Drawing.Point(55, 183);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(134, 38);
+            this.label2.Size = new System.Drawing.Size(202, 19);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Drag only one file..\r\nSupport JPG,PIN..";
+            this.label2.Text = "Supported Formats: JPG, PNG\r\n";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
@@ -338,9 +340,22 @@
             // 
             // errorProvider1
             // 
-            this.errorProvider1.BlinkRate = 0;
+            this.errorProvider1.BlinkRate = 10;
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.LightGray;
+            this.label7.Location = new System.Drawing.Point(77, 206);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(159, 16);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Single file processing only";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmImageCipher
             // 
@@ -400,6 +415,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.FolderBrowserDialog fbdCreateFileLocation;
+        private System.Windows.Forms.Label label7;
     }
 }
 

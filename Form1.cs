@@ -34,11 +34,10 @@ namespace ImageCipher
 
             if (FilePath.Length > 0)
             {
-                MessageBox.Show("File path : " + FilePath[0]);
                 _FilePath = FilePath[0];
-                lblFilePath.Text = _FilePath;
-                lblFilePath.ForeColor = Color.Red;
-                btnDecrypt.Enabled = true;
+                MessageBox.Show("File path : " + _FilePath);
+                lblFilePath.Text = "File loaded successfully";
+                lblFilePath.ForeColor = Color.Green;
 
             }
         }
@@ -66,9 +65,8 @@ namespace ImageCipher
             {
                 _FilePath = ofdChooseImage.FileName;
                 MessageBox.Show("File path : " + _FilePath);
-                lblFilePath.Text = _FilePath;
-                lblFilePath.ForeColor = Color.Red;
-                btnDecrypt.Enabled = true;
+                lblFilePath.Text = "File loaded successfully";
+                lblFilePath.ForeColor = Color.Green;
             }
 
         }
@@ -129,25 +127,29 @@ namespace ImageCipher
             }
             return false;
         }
-        private bool _DecryptFile(string inputFile, string outputFile, string key, byte[] iv)
+        private bool _DecryptFile(string inputFile, string outputFile, string key)
         {
             try
             {
                 using (Aes aesAlg = Aes.Create())
                 {
                     aesAlg.Key = _DerivedKey(key);
-                    aesAlg.IV = iv;
-
 
                     using (FileStream fsInput = new FileStream(inputFile, FileMode.Open))
-                    using (FileStream fsOutput = new FileStream(outputFile, FileMode.Create))
-                    using (ICryptoTransform decryptor = aesAlg.CreateDecryptor())
-                    using (CryptoStream cryptoStream = new CryptoStream(fsOutput, decryptor, CryptoStreamMode.Write))
                     {
-                        fsInput.Seek(iv.Length, SeekOrigin.Begin);
-                        fsInput.CopyTo(cryptoStream);
+                        byte[] iv = new byte[16];
+                        fsInput.Read(iv, 0, iv.Length);
+                        aesAlg.IV = iv;
+
+                        using (FileStream fsOutput = new FileStream(outputFile, FileMode.Create))
+                        using (ICryptoTransform decryptor = aesAlg.CreateDecryptor())
+                        using (CryptoStream cryptoStream = new CryptoStream(fsOutput, decryptor, CryptoStreamMode.Write))
+                        {
+                            fsInput.Seek(iv.Length, SeekOrigin.Begin);
+                            fsInput.CopyTo(cryptoStream);
+                        }
+                        return true;
                     }
-                    return true;
                 }
             }
             catch (CryptographicException ex)
@@ -164,7 +166,7 @@ namespace ImageCipher
             if (!this.ValidateChildren())
                 return;
 
-            if (string.IsNullOrEmpty(_FilePath) && string.IsNullOrEmpty(_FilePath))
+            if (string.IsNullOrEmpty(_FilePath) && string.IsNullOrEmpty(_FolderPath))
             {
                 MessageBox.Show("Please select a file to encrypt.");
                 return;
@@ -191,9 +193,12 @@ namespace ImageCipher
         private void txbPassword_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txbPassword.Text))
+            {
+                e.Cancel = true;
                 errorProvider1.SetError(txbPassword, "This field must not be empty!");
+            }
             else
-                errorProvider1.SetError(txbPassword, "");
+                errorProvider1.SetError(txbPassword, null);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -204,6 +209,8 @@ namespace ImageCipher
             {
                 _FolderPath = fbdCreateFileLocation.SelectedPath;
                 btnEncrypt.Enabled = true;
+                btnDecrypt.Enabled = true;
+
             }
         }
 
@@ -212,23 +219,17 @@ namespace ImageCipher
             if (!this.ValidateChildren())
                 return;
 
-            if (string.IsNullOrEmpty(_FilePath) && string.IsNullOrEmpty(_FilePath))
+            if (string.IsNullOrEmpty(_FilePath) && string.IsNullOrEmpty(_FolderPath))
             {
-                MessageBox.Show("Please select a file to encrypt.");
+                MessageBox.Show("Please select a file to decrypt.");
                 return;
             }
 
-            byte[] iv;
-            using (Aes aesAlg = Aes.Create())
-            {
-                iv = aesAlg.IV;
-            }
+            string fileDecryptedPath = _FolderPath + "\\" + Path.GetFileNameWithoutExtension(_FilePath) + "_decrypted" + Path.GetExtension(_FilePath);
 
-            string fileEncryptedPath = _FolderPath + "\\" + Path.GetFileNameWithoutExtension(_FilePath) + "_encrypted" + Path.GetExtension(_FilePath);
-
-            if (_DecryptFile(_FilePath, fileEncryptedPath, txbPassword.Text, iv))
+            if (_DecryptFile(_FilePath, fileDecryptedPath, txbPassword.Text))
             {
-                MessageBox.Show("File decrypted successfully! Saved at : " + fileEncryptedPath);
+                MessageBox.Show("File decrypted successfully! Saved at : " + fileDecryptedPath);
             }
             else
             {
