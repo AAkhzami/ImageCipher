@@ -85,11 +85,25 @@ namespace ImageCipher
             }
         }
 
+        // Derive an 16 byte key from user's input becuse AES here requires 16 byte but the user can input any length of strign as a key,
+        // so we will hash the input and take the first 16 bytes of the hash as the key for AES encryption 
+        private static byte[] _DerivedKey(string input)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+                byte[] finalArray = new byte[16];
+                Array.Copy(bytes, finalArray, 16);
+
+                return finalArray;
+            }
+        }
         private void EncryptFile(string inputFile, string outputFile, string key, byte[] iv)
         {
             using (Aes aesAlg = Aes.Create())
             {
-                aesAlg.Key = System.Text.Encoding.UTF8.GetBytes(key);
+
+                aesAlg.Key = _DerivedKey(key);
                 aesAlg.IV = iv;
 
                 using (FileStream fsInput = new FileStream(inputFile, FileMode.Open))
@@ -102,6 +116,18 @@ namespace ImageCipher
                 }
             }
         }
+        public static string ComposeHash(string input)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                string hash = string.Empty;
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+
+                return BitConverter.ToString(bytes).Replace("-", "").ToLower();
+            }
+        }
+
         private void btnEncrypt_Click(object sender, EventArgs e)
         {
             if (!this.ValidateChildren())
