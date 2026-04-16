@@ -37,6 +37,7 @@ namespace ImageCipher
                 MessageBox.Show("File path : " + FilePath[0]);
                 _FilePath = FilePath[0];
                 lblFilePath.Text = _FilePath;
+                lblFilePath.ForeColor = Color.Red;
                 btnDecrypt.Enabled = true;
 
             }
@@ -66,6 +67,7 @@ namespace ImageCipher
                 _FilePath = ofdChooseImage.FileName;
                 MessageBox.Show("File path : " + _FilePath);
                 lblFilePath.Text = _FilePath;
+                lblFilePath.ForeColor = Color.Red;
                 btnDecrypt.Enabled = true;
             }
 
@@ -226,11 +228,11 @@ namespace ImageCipher
 
             if (_DecryptFile(_FilePath, fileEncryptedPath, txbPassword.Text, iv))
             {
-                MessageBox.Show("File encrypted successfully! Saved at : " + fileEncryptedPath);
+                MessageBox.Show("File decrypted successfully! Saved at : " + fileEncryptedPath);
             }
             else
             {
-                MessageBox.Show("An error occurred during encryption.");
+                MessageBox.Show("An error occurred during decryption.");
             }
         }
     }
