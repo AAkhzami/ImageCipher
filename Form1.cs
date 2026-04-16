@@ -127,7 +127,36 @@ namespace ImageCipher
             }
             return false;
         }
+        private static bool _DecryptFile(string inputFile, string outputFile, string key, byte[] iv)
+        {
+            try
+            {
+                using (Aes aesAlg = Aes.Create())
+                {
+                    aesAlg.Key = _DerivedKey(key);
+                    aesAlg.IV = iv;
 
+
+                    using (FileStream fsInput = new FileStream(inputFile, FileMode.Open))
+                    using (FileStream fsOutput = new FileStream(outputFile, FileMode.Create))
+                    using (ICryptoTransform decryptor = aesAlg.CreateDecryptor())
+                    using (CryptoStream cryptoStream = new CryptoStream(fsOutput, decryptor, CryptoStreamMode.Write))
+                    {
+                        fsInput.Seek(iv.Length, SeekOrigin.Begin);
+                        fsInput.CopyTo(cryptoStream);
+                    }
+                    return true;
+                }
+            }
+            catch (CryptographicException ex)
+            {
+
+            }
+            catch (Exception ex)
+            {
+            }
+            return false;
+        }
         private void btnEncrypt_Click(object sender, EventArgs e)
         {
             if (!this.ValidateChildren())
