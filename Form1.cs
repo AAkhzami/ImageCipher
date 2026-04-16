@@ -97,7 +97,6 @@ namespace ImageCipher
                 using (ICryptoTransform encryptor = aesAlg.CreateEncryptor())
                 using (CryptoStream cryptoStream = new CryptoStream(fsOutput, encryptor, CryptoStreamMode.Write))
                 {
-                    // Write the IV to the beginning of the file
                     fsOutput.Write(iv, 0, iv.Length);
                     fsInput.CopyTo(cryptoStream);
                 }
@@ -105,11 +104,24 @@ namespace ImageCipher
         }
         private void btnEncrypt_Click(object sender, EventArgs e)
         {
+            if (!this.ValidateChildren())
+                return;
+
             if(string.IsNullOrEmpty(_FilePath) && string.IsNullOrEmpty(_FilePath))
             {
                 MessageBox.Show("Please select a file to encrypt.");
                 return;
             }
+
+            byte[] iv;
+            using (Aes aesAlg = Aes.Create())
+            {
+                iv = aesAlg.IV;
+            }
+            
+            string fileEncryptedPath = _FolderPath + "\\" + Path.GetFileNameWithoutExtension(_FilePath) + "_encrypted" + Path.GetExtension(_FilePath);
+            
+            EncryptFile(_FilePath, fileEncryptedPath, txbPassword.Text, iv);
         }
 
         private void txbPassword_Validating(object sender, CancelEventArgs e)
