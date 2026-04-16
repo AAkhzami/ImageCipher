@@ -116,17 +116,6 @@ namespace ImageCipher
                 }
             }
         }
-        public static string ComposeHash(string input)
-        {
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                string hash = string.Empty;
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-
-
-                return BitConverter.ToString(bytes).Replace("-", "").ToLower();
-            }
-        }
 
         private void btnEncrypt_Click(object sender, EventArgs e)
         {
