@@ -98,7 +98,7 @@ namespace ImageCipher
                 return finalArray;
             }
         }
-        private bool EncryptFile(string inputFile, string outputFile, string key, byte[] iv)
+        private bool _EncryptFile(string inputFile, string outputFile, string key, byte[] iv)
         {
             try
             {
@@ -127,7 +127,7 @@ namespace ImageCipher
             }
             return false;
         }
-        private static bool _DecryptFile(string inputFile, string outputFile, string key, byte[] iv)
+        private bool _DecryptFile(string inputFile, string outputFile, string key, byte[] iv)
         {
             try
             {
@@ -176,7 +176,7 @@ namespace ImageCipher
 
             string fileEncryptedPath = _FolderPath + "\\" + Path.GetFileNameWithoutExtension(_FilePath) + "_encrypted" + Path.GetExtension(_FilePath);
 
-            if (EncryptFile(_FilePath, fileEncryptedPath, txbPassword.Text, iv))
+            if (_EncryptFile(_FilePath, fileEncryptedPath, txbPassword.Text, iv))
             {
                 MessageBox.Show("File encrypted successfully! Saved at : " + fileEncryptedPath);
             }
@@ -202,6 +202,35 @@ namespace ImageCipher
             {
                 _FolderPath = fbdCreateFileLocation.SelectedPath;
                 btnEncrypt.Enabled = true;
+            }
+        }
+
+        private void btnDecrypt_Click(object sender, EventArgs e)
+        {
+            if (!this.ValidateChildren())
+                return;
+
+            if (string.IsNullOrEmpty(_FilePath) && string.IsNullOrEmpty(_FilePath))
+            {
+                MessageBox.Show("Please select a file to encrypt.");
+                return;
+            }
+
+            byte[] iv;
+            using (Aes aesAlg = Aes.Create())
+            {
+                iv = aesAlg.IV;
+            }
+
+            string fileEncryptedPath = _FolderPath + "\\" + Path.GetFileNameWithoutExtension(_FilePath) + "_encrypted" + Path.GetExtension(_FilePath);
+
+            if (_DecryptFile(_FilePath, fileEncryptedPath, txbPassword.Text, iv))
+            {
+                MessageBox.Show("File encrypted successfully! Saved at : " + fileEncryptedPath);
+            }
+            else
+            {
+                MessageBox.Show("An error occurred during encryption.");
             }
         }
     }
