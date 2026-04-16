@@ -9,19 +9,28 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace ImageCipher
 {
     public partial class frmImageCipher : Form
     {
+        private static void LoggingError(string message)
+        {
+            string sourceName = "ImageCipher";
 
+            if (!EventLog.SourceExists(sourceName))
+            {
+                EventLog.CreateEventSource(sourceName, "Application");
+            }
+            EventLog.WriteEntry(sourceName, message, EventLogEntryType.Error);
+        }
         string _FilePath = string.Empty;
         string _FolderPath = string.Empty;
         public frmImageCipher()
         {
             InitializeComponent();
         }
-
         private void panel1_DragDrop(object sender, DragEventArgs e)
         {
             string[] FilePath = e.Data.GetData(DataFormats.FileDrop) as string[];
@@ -41,7 +50,6 @@ namespace ImageCipher
 
             }
         }
-
         private void panel1_DragEnter(object sender, DragEventArgs e)
         {
             // to check if the data is in the form of file drop
@@ -69,7 +77,6 @@ namespace ImageCipher
             }
 
         }
-
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             if(txbPassword.PasswordChar == '*')
@@ -119,10 +126,11 @@ namespace ImageCipher
             }
             catch (CryptographicException ex)
             {
-
+                LoggingError("Cryptographic error: " + ex.Message);
             }
             catch (Exception ex)
             {
+                LoggingError("General error: " + ex.Message);
             }
             return false;
         }
@@ -155,10 +163,11 @@ namespace ImageCipher
             }
             catch (CryptographicException ex)
             {
-
+                LoggingError("Cryptographic error: " + ex.Message);
             }
             catch (Exception ex)
             {
+                LoggingError("General error: " + ex.Message);
             }
             return false;
         }
