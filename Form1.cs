@@ -156,10 +156,6 @@ namespace ImageCipher
                 errorProvider1.SetError(txbPassword, "This field must not be empty!");
             else
                 errorProvider1.SetError(txbPassword, "");
-            if(txbPassword.Text.Length < 16)
-                errorProvider1.SetError(txbPassword, "The key must be exactly 16 characters long!");
-            else
-                errorProvider1.SetError(txbPassword, "");
         }
 
         private void button1_Click_1(object sender, EventArgs e)
