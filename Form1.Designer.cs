@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.lblFilePath = new System.Windows.Forms.Label();
             this.btnChooseImage = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,12 +48,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txbPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnChooseFolder = new System.Windows.Forms.Button();
             this.ofdChooseImage = new System.Windows.Forms.OpenFileDialog();
             this.label6 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.fbdCreateFileLocation = new System.Windows.Forms.FolderBrowserDialog();
-            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -82,6 +82,19 @@
             this.panel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.panel1_DragDrop);
             this.panel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.panel1_DragEnter);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.LightGray;
+            this.label7.Location = new System.Drawing.Point(77, 206);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(159, 16);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Single file processing only";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // lblFilePath
             // 
             this.lblFilePath.Font = new System.Drawing.Font("Microsoft Tai Le", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -108,7 +121,7 @@
             this.btnChooseImage.TabIndex = 7;
             this.btnChooseImage.Text = "Choose Image";
             this.btnChooseImage.UseVisualStyleBackColor = false;
-            this.btnChooseImage.Click += new System.EventHandler(this.button1_Click);
+            this.btnChooseImage.Click += new System.EventHandler(this.btnChooseImage_Click);
             // 
             // label2
             // 
@@ -158,7 +171,7 @@
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.txbPassword);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.btnChooseFolder);
             this.panel2.Location = new System.Drawing.Point(356, 112);
             this.panel2.Margin = new System.Windows.Forms.Padding(19, 20, 19, 20);
             this.panel2.Name = "panel2";
@@ -306,21 +319,21 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Encryption";
             // 
-            // button1
+            // btnChooseFolder
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(84)))), ((int)(((byte)(112)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Tai Le", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(38, 238);
-            this.button1.Margin = new System.Windows.Forms.Padding(26, 28, 26, 28);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(377, 35);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Choose where to save the image";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnChooseFolder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(84)))), ((int)(((byte)(112)))));
+            this.btnChooseFolder.FlatAppearance.BorderSize = 0;
+            this.btnChooseFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChooseFolder.Font = new System.Drawing.Font("Microsoft Tai Le", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChooseFolder.ForeColor = System.Drawing.Color.White;
+            this.btnChooseFolder.Location = new System.Drawing.Point(38, 238);
+            this.btnChooseFolder.Margin = new System.Windows.Forms.Padding(26, 28, 26, 28);
+            this.btnChooseFolder.Name = "btnChooseFolder";
+            this.btnChooseFolder.Size = new System.Drawing.Size(377, 35);
+            this.btnChooseFolder.TabIndex = 11;
+            this.btnChooseFolder.Text = "Choose where to save the image";
+            this.btnChooseFolder.UseVisualStyleBackColor = false;
+            this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
             // 
             // ofdChooseImage
             // 
@@ -343,19 +356,6 @@
             this.errorProvider1.BlinkRate = 10;
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.LightGray;
-            this.label7.Location = new System.Drawing.Point(77, 206);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(159, 16);
-            this.label7.TabIndex = 9;
-            this.label7.Text = "Single file processing only";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmImageCipher
             // 
@@ -413,7 +413,7 @@
         private System.Windows.Forms.Label lblFilePath;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnChooseFolder;
         private System.Windows.Forms.FolderBrowserDialog fbdCreateFileLocation;
         private System.Windows.Forms.Label label7;
     }

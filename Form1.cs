@@ -51,8 +51,7 @@ namespace ImageCipher
             else
                 e.Effect = DragDropEffects.None;
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnChooseImage_Click(object sender, EventArgs e)
         {
             ofdChooseImage.Title = "Select Image to Encrypt";
             ofdChooseImage.Filter = "Image Files (*.jpg; *.png)|*.jpg; *.png";
@@ -137,6 +136,8 @@ namespace ImageCipher
 
                     using (FileStream fsInput = new FileStream(inputFile, FileMode.Open))
                     {
+                        // here we read the first 16 bytes of the encrypted file to get the IV that was used during encryption,
+                        // because the IV is needed for decryption and it was stored at the beginning of the encrypted file.
                         byte[] iv = new byte[16];
                         fsInput.Read(iv, 0, iv.Length);
                         aesAlg.IV = iv;
@@ -189,7 +190,6 @@ namespace ImageCipher
                 MessageBox.Show("An error occurred during encryption.");
             }
         }
-
         private void txbPassword_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txbPassword.Text))
@@ -200,8 +200,7 @@ namespace ImageCipher
             else
                 errorProvider1.SetError(txbPassword, null);
         }
-
-        private void button1_Click_1(object sender, EventArgs e)
+        private void btnChooseFolder_Click(object sender, EventArgs e)
         {
             fbdCreateFileLocation.Description = "Please select the folder where you want to save the image.";
             fbdCreateFileLocation.ShowNewFolderButton = true;
@@ -213,7 +212,6 @@ namespace ImageCipher
 
             }
         }
-
         private void btnDecrypt_Click(object sender, EventArgs e)
         {
             if (!this.ValidateChildren())
