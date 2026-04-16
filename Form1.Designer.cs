@@ -338,6 +338,7 @@
             // ofdChooseImage
             // 
             this.ofdChooseImage.FileName = "Choose Image";
+            this.ofdChooseImage.RestoreDirectory = true;
             // 
             // label6
             // 
