@@ -43,6 +43,16 @@ namespace ImageCipher
 
             if (FilePath.Length > 0)
             {
+                switch(Path.GetExtension(FilePath[0]).ToLower())
+                {
+                    case ".jpg":
+                    case ".png":
+                        break;
+                    default:
+                        MessageBox.Show("File type is not supported");
+                        return;
+                }
+
                 _FilePath = FilePath[0];
                 MessageBox.Show("File path : " + _FilePath);
                 lblFilePath.Text = "File loaded successfully";
@@ -70,6 +80,15 @@ namespace ImageCipher
 
             if(ofdChooseImage.ShowDialog() == DialogResult.OK)
             {
+                switch(Path.GetExtension(ofdChooseImage.FileName).ToLower())
+                {
+                    case ".jpg":
+                    case ".png":
+                        break;
+                    default:
+                        MessageBox.Show("File type is not supported");
+                        return;
+                }
                 _FilePath = ofdChooseImage.FileName;
                 MessageBox.Show("File path : " + _FilePath);
                 lblFilePath.Text = "File loaded successfully";
