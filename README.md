@@ -53,7 +53,7 @@ This project was developed as a practical application. It provides a real-world 
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/AAkhzami/ImageCipher.git](https://github.com/AAkhzami/ImageCipher.git)
+   git clone https://github.com/AAkhzami/ImageCipher.git
    ```
 2. Open the .sln file in Visual Studio.
 3. Important: Run Visual Studio as Administrator (Required for the first run to create the Event Log source).
