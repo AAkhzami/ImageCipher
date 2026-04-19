@@ -63,7 +63,7 @@ This project was developed as a practical application. It provides a real-world 
 
 ## 📸 UI Preview
 
-![App Preview](Screenshots/preview.png)
+![App Preview](screenshots/preview.png)
 
 ---
 
